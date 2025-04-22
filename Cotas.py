@@ -39,16 +39,15 @@ st.dataframe(distribuicao[['Faixa_Etaria', 'Gênero', 'Qtd_Cota']])
 # === Função para converter o DataFrame para Excel em memória ===
 def to_excel(df):
     output = BytesIO()
-    with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        df.to_excel(writer, index=False, sheet_name='Rateio')
+    df.to_csv(output, index=False, sep=';')  # CSV separado por ';'
     processed_data = output.getvalue()
     return processed_data
 
 # Botão de download
 arquivo_excel = to_excel(distribuicao[['Faixa_Etaria', 'Gênero', 'Qtd_Cota']])
 st.download_button(
-    label="📥 Baixar Resultado em Excel",
+    label="📥 Baixar Resultado",
     data=arquivo_excel,
-    file_name=f"rateio_{municipio}.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    file_name=f"rateio_{municipio}.csv",  # agora CSV
+    mime="text/csv"
 )

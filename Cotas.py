@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import xlsxwriter
 from io import BytesIO
 
 # === Carregar dados ===
